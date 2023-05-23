@@ -29,3 +29,6 @@ artifacts:
 # Store images in Google Artifact Registry
 images:
   - asia-southeast2-docker.pkg.dev/bangkit-2023-386023/go-sample-repository/goimage:$SHORT_SHA
+
+options:
+  logging: CLOUD_LOGGING_ONLY
