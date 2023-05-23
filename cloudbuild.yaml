@@ -22,13 +22,6 @@ steps:
            '--container-image', 
            'asia-southeast2-docker.pkg.dev/bangkit-2023-386023/go-sample-repository/goimage:$SHORT_SHA']
 
-# Save test logs to Google Cloud Storage
-artifacts:
-  objects:
-    location: gs://go-sample-bucket/
-    paths:
-      - ${SHORT_SHA}_test_log.xml
-
 # Store images in Google Artifact Registry
 images:
   - asia-southeast2-docker.pkg.dev/bangkit-2023-386023/go-sample-repository/goimage:$SHORT_SHA
