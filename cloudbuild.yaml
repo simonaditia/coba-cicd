@@ -1,0 +1,20 @@
+steps:
+  # Docker Build
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['build', '-t', 
+           'us-central1-docker.pkg.dev/bangkit-2023-386023/go-simple-app/goimage', 
+           '.']
+
+  # Docker Push
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', 
+           'us-central1-docker.pkg.dev/bangkit-2023-386023/go-simple-app/goimage']
+
+  # Entrypoint, timeout and environment variables
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    entrypoint: 'gcloud'
+    timeout: 240s
+    args: ['compute', 'instances', 
+           'update-container', 'go-vm-example',
+           '--container-image', 
+           'us-central1-docker.pkg.dev/bangkit-2023-386023/go-simple-app/goimage']
