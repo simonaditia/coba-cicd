@@ -28,3 +28,8 @@ images:
 
 options:
   logging: CLOUD_LOGGING_ONLY
+
+# the format would be {REGION}-docker.pkg.dev/{PROJECT_ID}/{ARTIFACT_REPSITORY}/{IMAGE_NAME}:$SHORT_SHA
+# REGION, adjust to your selected region, here we use jakarta (southeast2)
+# PROJECT_ID refers to ID of your bangkit project
+# ARTIFACT_REPOSITORY refers to repository name of your Artifact Registry you have created
