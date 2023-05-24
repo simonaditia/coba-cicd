@@ -26,6 +26,6 @@ func hello(c *gin.Context) {
 	c.Data(
 		http.StatusOK,
 		"application/json",
-		[]byte(`{"message": "hello world!"}`),
+		[]byte(`{"message": "hello ilt 6!"}`),
 	)
 }
