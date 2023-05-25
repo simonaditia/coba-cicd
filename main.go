@@ -2,14 +2,6 @@ package main
 
 import (
 	"net/http"
-
-	"github.com/gin-gonic/gin"
-)
-
-package main
-
-import (
-	"net/http"
 	"log"
 
 	"github.com/gin-gonic/gin"
@@ -84,7 +76,6 @@ func redirectHTTP(w http.ResponseWriter, req *http.Request) {
 	target := "https://" + req.Host + req.URL.Path
 	http.Redirect(w, req, target, http.StatusMovedPermanently)
 }
-
 
 
 /*
