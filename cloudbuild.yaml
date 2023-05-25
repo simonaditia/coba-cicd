@@ -18,7 +18,7 @@ steps:
   - name: 'gcr.io/cloud-builders/gcloud'
     timeout: 240s
     args: ['compute', 'instances', 
-           'update-container', 'coba-cicd',
+           'update-container', 'coba-cicd-vm',
            '--container-image', 
            'asia-southeast2-docker.pkg.dev/precise-space-382206/coba-cicd-repository/goimage:$SHORT_SHA']
 
