@@ -2,13 +2,13 @@ steps:
   # Docker Build
   - name: 'gcr.io/cloud-builders/docker'
     args: ['build', '-t', 
-           'asia-southeast2-docker.pkg.dev/precise-space-382206/coba-cicd-repository/goimage:$SHORT_SHA', 
+           'asia-southeast2-docker.pkg.dev/$PROJECT_ID/coba-cicd-repository/goimage:$SHORT_SHA', 
            '.']
 
   # Docker Push
   - name: 'gcr.io/cloud-builders/docker'
     args: ['push', 
-           'asia-southeast2-docker.pkg.dev/precise-space-382206/coba-cicd-repository/goimage:$SHORT_SHA']
+           'asia-southeast2-docker.pkg.dev/$PROJECT_ID/coba-cicd-repository/goimage:$SHORT_SHA']
 
   # Set zone
   - name: gcr.io/cloud-builders/gcloud
@@ -20,11 +20,11 @@ steps:
     args: ['compute', 'instances', 
            'update-container', 'coba-cicd-vm',
            '--container-image', 
-           'asia-southeast2-docker.pkg.dev/precise-space-382206/coba-cicd-repository/goimage:$SHORT_SHA']
+           'asia-southeast2-docker.pkg.dev/$PROJECT_ID/coba-cicd-repository/goimage:$SHORT_SHA']
 
 # Store images in Google Artifact Registry
 images:
-  - asia-southeast2-docker.pkg.dev/precise-space-382206/coba-cicd-repository/goimage:$SHORT_SHA
+  - asia-southeast2-docker.pkg.dev/$PROJECT_ID/coba-cicd-repository/goimage:$SHORT_SHA
 
 options:
   logging: CLOUD_LOGGING_ONLY
