@@ -11,6 +11,7 @@ func main() {
 	router.GET("/ping", ping)
 	router.GET("/hello", hello)
 	router.GET("/ilt6", ilt6)
+	router.GET("/halo", halo)
 
 	router.Run(":8080")
 }
@@ -36,5 +37,13 @@ func ilt6(c *gin.Context) {
 		http.StatusOK,
 		"application/json",
 		[]byte(`{"message": "this is ilt6!"}`),
+	)
+}
+
+func halo(c *gin.Context) {
+	c.Data(
+		http.StatusOK,
+		"application/json",
+		[]byte(`{"message": "halo halo!"}`),
 	)
 }
