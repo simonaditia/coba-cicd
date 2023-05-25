@@ -15,17 +15,28 @@ func main() {
 	router.GET("/halo", halo)
 
 	// router.Run(":8080")
+	
+	// Jalankan server HTTP di latar belakang
 	go func() {
-		if err := router.Run(":8080"); err != nil {
+		if err := http.ListenAndServe(":8080", router); err != nil {
 			log.Fatal("Error starting HTTP server:", err)
 		}
 	}()
 
+	// Konfigurasi server HTTPS
 	certFile := "cert.pem"
 	keyFile := "key.pem"
 
-	if err := router.RunTLS(":8443", certFile, keyFile); err != nil {
-		log.Fatal("Error starting HTTPS server:", err)
+	// Jalankan server HTTPS di latar belakang
+	go func() {
+		if err := http.ListenAndServeTLS(":8443", certFile, keyFile, router); err != nil {
+			log.Fatal("Error starting HTTPS server:", err)
+		}
+	}()
+
+	// Jalankan reverse proxy untuk mengarahkan lalu lintas HTTP ke HTTPS
+	if err := http.ListenAndServe(":80", http.HandlerFunc(redirectHTTP)); err != nil {
+		log.Fatal("Error starting reverse proxy:", err)
 	}
 }
 
@@ -59,4 +70,9 @@ func halo(c *gin.Context) {
 		"application/json",
 		[]byte(`{"message": "halo halo!"}`),
 	)
+}
+
+func redirectHTTP(w http.ResponseWriter, req *http.Request) {
+	target := "https://" + req.Host + req.URL.Path
+	http.Redirect(w, req, target, http.StatusMovedPermanently)
 }
